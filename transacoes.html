@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transações - Planeja+</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Adicionar link para Font Awesome se for usar ícones -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+</head>
+<body>
+    <div class="app-container">
+        <!-- Menu Lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="img/logo-planeja.png" alt="Logo Planeja+">
+            </div>
+            <nav>
+                <ul class="sidebar-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="transacoes.html" class="active">Transações</a></li>
+                    <li><a href="contas_cartoes.html">Contas e Cartões</a></li>
+                    <li><a href="dividas.html">Dívidas</a></li>
+                    <li><a href="metas.html">Metas</a></li>
+                    <li><a href="educacao_financeira.html">Educação Financeira</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-icons">
+                     <!-- Substituir por ícones reais (ex: Font Awesome) -->
+                    <a href="perfil.html" title="Perfil">👤</a> <!-- Ícone Usuário Placeholder -->
+                    <a href="configuracoes.html" title="Configurações">⚙️</a> <!-- Ícone Config Placeholder -->
+                </div>
+                <div class="sidebar-copyright">
+                    Planeja+<br>
+                    Copyright 2025
+                </div>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Transações</h1>
+                <!-- O botão "+ Nova Transação" pode abrir um modal ou ir para outra página -->
+                <a href="#modal-add-transacao" class="btn-adicionar" onclick="document.getElementById('modal-add-transacao').style.display='flex'">+ Nova transação</a>
+                <!-- Ou link para página separada: <a href="adicionar_transacao.html" class="btn-adicionar">+ Nova transação</a> -->
+            </header>
+
+            <!-- Lista de Transações -->
+            <section class="transacoes-lista content-section">
+                 <h2>Transações anteriores</h2>
+
+                 <!-- Exemplo de dia com transações -->
+                 <div class="transacao-dia">
+                     <h3>03/04/2025</h3>
+                     <div class="transacao-item">
+                         <span>Pix Maria da Silva</span>
+                         <span class="valor-negativo">- R$ 150,00</span>
+                     </div>
+                      <div class="transacao-item">
+                         <span>Padaria Quepão</span>
+                         <span class="valor-negativo">- R$ 45,00</span>
+                     </div>
+                 </div>
+
+                 <!-- Outro dia -->
+                  <div class="transacao-dia">
+                     <h3>01/04/2025</h3>
+                     <div class="transacao-item">
+                         <span>Mercado Preço Bom</span>
+                         <span class="valor-negativo">- R$ 1000,00</span>
+                     </div>
+                      <div class="transacao-item">
+                         <span>Plano de saúde Viva Mais</span>
+                         <span class="valor-negativo">- R$ 400,00</span>
+                     </div>
+                     <div class="transacao-item">
+                         <span>Boleto internet Sem Rede</span>
+                         <span class="valor-negativo">- R$ 200,00</span>
+                     </div>
+                     <div class="transacao-item">
+                         <span>Aluguel</span>
+                         <span class="valor-negativo">- R$ 1500,00</span>
+                     </div>
+                 </div>
+
+                  <!-- Outro dia -->
+                  <div class="transacao-dia">
+                     <h3>15/03/2025</h3>
+                     <div class="transacao-item">
+                         <span>Conta de energia Luz</span>
+                         <span class="valor-negativo">- R$ 200,00</span>
+                     </div>
+                 </div>
+
+                 <!-- Outro dia -->
+                  <div class="transacao-dia">
+                     <h3>04/03/2025</h3>
+                      <div class="transacao-item">
+                         <span>Conta de água Viva</span>
+                         <span class="valor-negativo">- R$ 85,00</span>
+                     </div>
+                      <div class="transacao-item">
+                         <span>Pix João da Silva</span>
+                         <span class="valor-negativo">- R$ 250,00</span>
+                     </div>
+                     <div class="transacao-item">
+                         <span>Cartão de crédito</span>
+                         <span class="valor-negativo">- R$ 70,00</span>
+                     </div>
+                      <div class="transacao-item">
+                         <span>Farmácia MedicaMais</span>
+                         <span class="valor-negativo">- R$ 100,00</span>
+                     </div>
+                 </div>
+                 <!-- Fim dos exemplos -->
+
+                 <div class="transacoes-footer">
+                     <a href="#">Ver transações com mais de 30 dias</a>
+                 </div>
+
+            </section>
+
+             <!-- Modal para Adicionar Transação (inicialmente escondido) -->
+            <div id="modal-add-transacao" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="document.getElementById('modal-add-transacao').style.display='none'">&times;</span>
+                    <h2>Adicionar Nova Transação</h2>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="tipo">Tipo:</label>
+                            <select id="tipo" name="tipo" required>
+                                <option value="despesa">Despesa</option>
+                                <option value="receita">Receita</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="descricao">Descrição:</label>
+                            <input type="text" id="descricao" name="descricao" placeholder="Ex: Supermercado, Salário" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="valor">Valor:</label>
+                            <input type="number" step="0.01" id="valor" name="valor" placeholder="0.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="data">Data:</label>
+                            <input type="date" id="data" name="data" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="categoria">Categoria:</label>
+                            <select id="categoria" name="categoria" required>
+                                <option value="">Selecione</option>
+                                <option value="alimentacao">Alimentação</option>
+                                <option value="transporte">Transporte</option>
+                                <option value="moradia">Moradia</option>
+                                <option value="lazer">Lazer</option>
+                                <option value="saude">Saúde</option>
+                                <option value="educacao">Educação</option>
+                                <option value="receitas">Receitas</option>
+                                <!-- Adicionar mais categorias ou carregar dinamicamente -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="conta_cartao">Conta/Cartão:</label>
+                             <select id="conta_cartao" name="conta_cartao" required>
+                                 <option value="">Selecione a origem/destino</option>
+                                 <!-- Carregar contas e cartões cadastrados aqui -->
+                                 <option value="conta1">Conta Corrente - Banco X</option>
+                                 <option value="cartao1">Cartão Crédito - Nu</option>
+                                 <option value="dinheiro">Dinheiro</option>
+                             </select>
+                        </div>
+                         <div class="form-group">
+                            <label for="parcelas">Parcelamento (se aplicável):</label>
+                            <input type="text" id="parcelas" name="parcelas" placeholder="Ex: 1 de 10">
+                        </div>
+                        <button type="submit" class="btn-principal">Salvar Transação</button>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+    </div>
+    <script>
+        // Script básico para fechar modal se clicar fora dele (opcional)
+        var modal = document.getElementById('modal-add-transacao');
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Planeja+</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Adicionar link para Font Awesome se for usar ícones -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+</head>
+<body>
+    <div class="app-container">
+        <!-- Menu Lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="img/logo-planeja.png" alt="Logo Planeja+">
+            </div>
+            <nav>
+                <ul class="sidebar-menu">
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="transacoes.html">Transações</a></li>
+                    <li><a href="contas_cartoes.html">Contas e Cartões</a></li>
+                    <li><a href="dividas.html">Dívidas</a></li>
+                    <li><a href="metas.html">Metas</a></li>
+                    <li><a href="educacao_financeira.html">Educação Financeira</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-icons">
+                    <!-- Substituir por ícones reais (ex: Font Awesome) -->
+                    <a href="perfil.html" title="Perfil">👤</a> <!-- Ícone Usuário Placeholder -->
+                    <a href="configuracoes.html" title="Configurações">⚙️</a> <!-- Ícone Config Placeholder -->
+                </div>
+                <div class="sidebar-copyright">
+                    Planeja+<br>
+                    Copyright 2025
+                </div>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Dashboard</h1>
+                <!-- Botão Adicionar pode ir aqui ou em telas específicas -->
+                <!-- <a href="#" class="btn-adicionar">+ Nova Transação</a> -->
+            </header>
+
+            <!-- Seção de Saldo e Projeção (Placeholder) -->
+            <section class="saldo-projecao-container content-section">
+                 <h2>Resumo Financeiro</h2>
+                 <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 20px;">
+                     <div>
+                         <h3>Saldo Atual</h3>
+                         <p style="font-size: 1.5em; font-weight: bold; color: #28a745;">R$ [Valor Saldo]</p>
+                     </div>
+                     <div>
+                         <h3>Projeção Fim do Mês</h3>
+                         <p style="font-size: 1.5em; font-weight: bold;">R$ [Valor Projeção]</p>
+                     </div>
+                 </div>
+            </section>
+
+            <!-- Grid de Gráficos -->
+            <div class="dashboard-grid">
+                <!-- Placeholder para Gráfico de Fluxo de Caixa Diário -->
+                <div class="chart-container">
+                    <h2>Fluxo de Caixa Diário (Mês Atual)</h2>
+                    <div class="chart-placeholder">[Gráfico de Linha/Barras: Saldo Diário]</div>
+                </div>
+
+                <!-- Gráficos do Mockup -->
+                <div class="chart-container">
+                    <h2>Resumo Despesas (Mês Atual vs Anterior)</h2>
+                    <div class="chart-placeholder">[Gráfico Pizza: Mês Atual / Mês Anterior]</div>
+                    <!-- Legenda Placeholder -->
+                    <div style="text-align: center; margin-top: 10px; font-size: 0.9em;">
+                        <span>⚫ Mês Atual</span> <span style="margin-left: 15px;">⚪ Mês Anterior</span>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                     <h2>Despesas x Orçamento (%)</h2>
+                     <div class="chart-placeholder">[Gráfico Gauge/Arco: 38%]</div>
+                     <!-- Legenda Placeholder -->
+                     <div style="text-align: center; margin-top: 10px; font-size: 0.9em;">
+                        <span>⚫ Orçamento</span> <span style="margin-left: 15px;">⚪ Despesa</span>
+                    </div>
+                </div>
+
+                 <div class="chart-container">
+                    <h2>Categoria de Despesas</h2>
+                    <div class="chart-placeholder">[Gráfico Donut: Saúde, Alimentação, Lazer]</div>
+                     <!-- Legenda Placeholder -->
+                     <div style="text-align: center; margin-top: 10px; font-size: 0.9em;">
+                        <span>⚫ Saúde</span> <span style="margin-left: 10px;">🔵 Alimentação</span> <span style="margin-left: 10px;">⚪ Lazer</span>
+                    </div>
+                </div>
+            </div>
+             <!-- Outros Alertas/Widgets do Dashboard podem ir aqui -->
+             <section class="alertas-metas content-section" style="margin-top: 30px;">
+                  <h2>Alertas e Metas</h2>
+                  <p>[Placeholder para alertas de metas ou dicas contextuais]</p>
+             </section>
+
+        </main>
+    </div>
+</body>
+</html>

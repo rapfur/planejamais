@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contas e Cartões - Planeja+</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Adicionar link para Font Awesome se for usar ícones -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+</head>
+<body>
+    <div class="app-container">
+        <!-- Menu Lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="img/logo-planeja.png" alt="Logo Planeja+">
+            </div>
+            <nav>
+                <ul class="sidebar-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="transacoes.html">Transações</a></li>
+                    <li><a href="contas_cartoes.html" class="active">Contas e Cartões</a></li>
+                    <li><a href="dividas.html">Dívidas</a></li>
+                    <li><a href="metas.html">Metas</a></li>
+                    <li><a href="educacao_financeira.html">Educação Financeira</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-icons">
+                    <a href="perfil.html" title="Perfil">👤</a>
+                    <a href="configuracoes.html" title="Configurações">⚙️</a>
+                </div>
+                <div class="sidebar-copyright">
+                    Planeja+<br>
+                    Copyright 2025
+                </div>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Contas e Cartões</h1>
+                 <!-- Botão para adicionar nova conta ou cartão -->
+                 <a href="#" class="btn-adicionar">+ Adicionar Conta/Cartão</a> <!-- Link para modal ou página de adição -->
+            </header>
+
+            <!-- Seção de Listagem de Contas e Cartões -->
+            <section class="lista-itens content-section">
+                 <h2>Contas e Cartões Cadastrados</h2>
+
+                 <!-- Exemplo de item (Cartão) -->
+                 <div class="item">
+                     <span>Cartão de Crédito - Banco do Brasil S.A.</span>
+                     <span class="valor-negativo">- R$ 3930.00</span> <!-- Saldo/Fatura -->
+                     <!-- Adicionar botões de Editar/Excluir aqui se necessário -->
+                 </div>
+
+                 <!-- Exemplo de item (Cartão) -->
+                 <div class="item">
+                     <span>Cartão de Crédito - Nu Pagamentos S.A.</span>
+                     <span class="valor-negativo">- R$ 70.00</span> <!-- Saldo/Fatura -->
+                 </div>
+
+                 <!-- Exemplo de item (Conta Corrente) -->
+                  <div class="item">
+                     <span>Conta Corrente - Banco X</span>
+                     <span>R$ 5200.00</span> <!-- Saldo Atual (Positivo) -->
+                 </div>
+
+                 <!-- Placeholder se não houver itens -->
+                 <!--
+                 <div class="empty-state">
+                     <p>Nenhuma conta ou cartão cadastrado ainda.</p>
+                 </div>
+                 -->
+            </section>
+
+             <!-- Seção para Conciliação Bancária (Placeholder) -->
+            <section class="conciliacao-bancaria content-section">
+                <h2>Conciliação Bancária</h2>
+                <p style="color: var(--cor-cinza-texto); margin-bottom: 15px;">Informe o saldo real da sua conta para manter tudo sincronizado.</p>
+                <form action="#" method="post" style="display: flex; align-items: flex-end; gap: 15px;">
+                     <div class="form-group" style="flex-grow: 1; margin-bottom: 0;">
+                         <label for="conta_conciliacao">Selecione a Conta:</label>
+                         <select id="conta_conciliacao" name="conta_conciliacao" required>
+                              <option value="">Selecione...</option>
+                              <!-- Carregar contas cadastradas aqui -->
+                              <option value="conta1">Conta Corrente - Banco X</option>
+                         </select>
+                     </div>
+                     <div class="form-group" style="margin-bottom: 0;">
+                         <label for="saldo_real">Saldo Real (R$):</label>
+                         <input type="number" step="0.01" id="saldo_real" name="saldo_real" placeholder="0.00" required>
+                     </div>
+                     <button type="submit" class="btn-principal" style="width: auto; padding: 10px 20px;">Conciliar</button>
+                </form>
+                <p style="font-size: 0.85em; color: var(--cor-cinza-texto); margin-top: 10px;">
+                    O saldo calculado pelo Planeja+ para esta conta hoje é: R$ [Valor Calculado]. A diferença é: R$ [Diferença].
+                </p>
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contas e Cartões - Planeja+</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Adicionar link para Font Awesome se for usar ícones -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+    <style>
+        /* Estilo para separar um pouco as seções e ações dos itens */
+        .content-section { margin-bottom: 30px; }
+        .item-actions button { margin-left: 8px; padding: 3px 8px; font-size: 0.85em; cursor: pointer; border-radius: 3px; border: 1px solid #ccc; }
+        .item-actions button.delete-btn { background-color: var(--cor-vermelho-despesa); color: white; border-color: var(--cor-vermelho-despesa); }
+        .item-actions button:disabled { background-color: #e9ecef; color: #6c757d; cursor: not-allowed; border-color: #ced4da;}
+        .card-details { font-size: 0.9em; color: var(--cor-cinza-texto); margin-left: 20px; } /* Estilo para detalhes do cartão */
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Menu Lateral (igual aos outros) -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="img/logo-planeja.png" alt="Logo Planeja+">
+            </div>
+            <nav>
+                <ul class="sidebar-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="transacoes.html">Transações</a></li>
+                    <li><a href="contas_cartoes.html" class="active">Contas e Cartões</a></li>
+                    <li><a href="dividas.html">Dívidas</a></li>
+                    <li><a href="metas.html">Metas</a></li>
+                    <li><a href="educacao_financeira.html">Educação Financeira</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-icons">
+                    <a href="perfil.html" title="Perfil">👤</a>
+                    <a href="configuracoes.html" title="Configurações">⚙️</a>
+                </div>
+                <div class="sidebar-copyright">
+                    Planeja+<br> Copyright 2025
+                </div>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+
+            <!-- Seção de Contas (com CRUD) -->
+            <section id="secao-contas" class="content-section">
+                <header class="main-header" style="margin-bottom: 15px;">
+                    <h2>Minhas Contas</h2>
+                    <button class="btn-adicionar" onclick="openContaModalForAdd()">+ Adicionar Conta</button>
+                </header>
+                <div id="lista-contas" class="lista-itens">
+                    <!-- A lista de contas será preenchida pelo JavaScript -->
+                    <div class="empty-state"><p>Carregando contas...</p></div>
+                </div>
+            </section>
+
+            <!-- Seção de Cartões (Read-Only) -->
+            <section id="secao-cartoes" class="content-section">
+                 <header class="main-header" style="margin-bottom: 15px;">
+                    <h2>Meus Cartões</h2>
+                     <!-- Botão pode ser desabilitado ou removido se não faz nada agora -->
+                     <button class="btn-adicionar" disabled title="Funcionalidade futura">+ Adicionar Cartão</button>
+                </header>
+                 <div id="lista-cartoes" class="lista-itens">
+                     <!-- A lista de cartões será preenchida pelo JavaScript (com dados fictícios) -->
+                     <div class="empty-state"><p>Carregando cartões...</p></div>
+                 </div>
+            </section>
+
+            <!-- Seção de Conciliação Bancária (igual a antes) -->
+            <section class="conciliacao-bancaria content-section">
+                <h2>Conciliação Bancária</h2>
+                <p style="color: var(--cor-cinza-texto); margin-bottom: 15px;">Informe o saldo real de uma conta para manter tudo sincronizado.</p>
+                <form action="#" method="post" id="conciliacaoForm" style="display: flex; align-items: flex-end; gap: 15px; flex-wrap: wrap;">
+                     <div class="form-group" style="flex-grow: 1; margin-bottom: 0; min-width: 200px;">
+                         <label for="conta_conciliacao">Selecione a Conta:</label>
+                         <select id="conta_conciliacao" name="conta_conciliacao" required>
+                              <option value="">Selecione...</option>
+                              <!-- Opções preenchidas pelo JS -->
+                         </select>
+                     </div>
+                     <div class="form-group" style="margin-bottom: 0;">
+                         <label for="saldo_real">Saldo Real (R$):</label>
+                         <input type="number" step="0.01" id="saldo_real" name="saldo_real" placeholder="0.00" required style="width: 120px;">
+                     </div>
+                     <button type="submit" class="btn-principal" style="width: auto; padding: 10px 20px;">Conciliar</button>
+                </form>
+                <p id="info-conciliacao" style="font-size: 0.85em; color: var(--cor-cinza-texto); margin-top: 10px; min-height: 1.2em;">
+                    <!-- Mensagem de conciliação aparecerá aqui -->
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal para Adicionar/Editar APENAS CONTAS -->
+    <div id="modal-add-edit-conta" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeContaModal()">&times;</span>
+            <h2 id="modal-conta-title">Adicionar Nova Conta</h2>
+            <form id="contaForm">
+                <input type="hidden" id="contaId" name="contaId">
+
+                <div class="form-group">
+                    <label for="contaNome">Nome da Conta:</label>
+                    <input type="text" id="contaNome" name="contaNome" placeholder="Ex: Conta Inter, Poupança Caixa" required>
+                </div>
+                <div class="form-group">
+                    <label for="contaTipo">Tipo de Conta:</label>
+                    <select id="contaTipo" name="contaTipo" required>
+                        <option value="">Selecione o tipo</option>
+                        <option value="Conta Corrente">Conta Corrente</option>
+                        <option value="Conta Poupança">Conta Poupança</option>
+                        <option value="Conta Investimento">Conta Investimento</option>
+                        <option value="Dinheiro Físico">Dinheiro Físico</option>
+                        <option value="Outra Conta">Outra Conta</option>
+                    </select>
+                </div>
+                 <div class="form-group">
+                    <label for="contaSaldoInicial">Saldo Inicial (R$):</label>
+                    <input type="number" step="0.01" id="contaSaldoInicial" name="contaSaldoInicial" placeholder="0.00" value="0.00" required>
+                 </div>
+
+                <div style="margin-top: 20px;">
+                    <button type="submit" class="btn-principal" id="btnSalvarConta">Salvar</button>
+                    <button type="button" onclick="limparFormConta()" style="margin-left: 10px;">Limpar</button>
+                    <button type="button" onclick="closeContaModal()" style="margin-left: 10px;">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bloco Único de JavaScript -->
+    <script>
+        // --- Referências aos Elementos do DOM ---
+        const listaContasContainer = document.getElementById('lista-contas');
+        const listaCartoesContainer = document.getElementById('lista-cartoes');
+        const modalConta = document.getElementById('modal-add-edit-conta');
+        const modalContaTitle = document.getElementById('modal-conta-title');
+        const contaForm = document.getElementById('contaForm');
+        const contaIdInput = document.getElementById('contaId');
+        const contaNomeInput = document.getElementById('contaNome');
+        const contaTipoInput = document.getElementById('contaTipo');
+        const contaSaldoInicialInput = document.getElementById('contaSaldoInicial'); // Novo campo
+        const btnSalvarConta = document.getElementById('btnSalvarConta');
+        const selectConciliacao = document.getElementById('conta_conciliacao'); // Select da conciliação
+
+        // --- Dados Fictícios para Cartões (localStorage ou direto aqui) ---
+        const cartoesFicticios = [
+            { id: 101, nome: "Cartão Nubank", limite: 5000.00, parcelas: 3, devido: 1250.50 },
+            { id: 102, nome: "Cartão Inter", limite: 8000.00, parcelas: 1, devido: 340.00 },
+            { id: 103, nome: "Cartão XP Visa", limite: 15000.00, parcelas: 0, devido: 0.00 }
+        ];
+        // Salva no localStorage se não existir (apenas para exemplo)
+        if (!localStorage.getItem('cartoesPlaneja')) {
+             localStorage.setItem('cartoesPlaneja', JSON.stringify(cartoesFicticios));
+        }
+
+
+        // --- Funções Auxiliares ---
+        function gerarIdSimples() { return Date.now(); } // Gera ID simples
+
+        // Formatar valor como moeda brasileira
+        function formatCurrency(value) {
+             return parseFloat(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // --- CRUD para CONTAS ---
+
+        // READ Contas e Mostra na Tela
+        function displayContas() {
+            console.log("Atualizando lista de Contas...");
+            const contas = JSON.parse(localStorage.getItem('contasPlaneja')) || [];
+            listaContasContainer.innerHTML = ''; // Limpa antes de adicionar
+            selectConciliacao.innerHTML = '<option value="">Selecione...</option>'; // Limpa e adiciona opção padrão
+
+            if (contas.length === 0) {
+                listaContasContainer.innerHTML = '<div class="empty-state"><p>Nenhuma conta cadastrada.</p></div>';
+            } else {
+                contas.forEach(conta => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('item');
+                    itemDiv.innerHTML = `
+                        <div>
+                            <span>${conta.nome} (${conta.tipo})</span>
+                            <span class="card-details">Saldo: ${formatCurrency(conta.saldoInicial || 0)}</span>
+                        </div>
+                        <div class="item-actions">
+                            <button onclick="editConta(${conta.id})">Editar</button>
+                            <button class="delete-btn" onclick="deleteConta(${conta.id})">Excluir</button>
+                        </div>
+                    `;
+                    listaContasContainer.appendChild(itemDiv);
+
+                    // Adiciona conta ao select de conciliação
+                    const option = document.createElement('option');
+                    option.value = conta.id;
+                    option.textContent = `${conta.nome} (${conta.tipo})`;
+                    selectConciliacao.appendChild(option);
+                });
+            }
+        }
+
+        // DELETE Conta
+        function deleteConta(idParaDeletar) {
+            if (!confirm('Tem certeza que deseja excluir esta conta?')) { return; }
+            let contas = JSON.parse(localStorage.getItem('contasPlaneja')) || [];
+            const novasContas = contas.filter(conta => conta.id !== idParaDeletar);
+            if (contas.length === novasContas.length) {
+                 console.error('Conta não encontrada para deletar ID:', idParaDeletar);
+                 alert('Erro ao excluir conta.'); return;
+            }
+            localStorage.setItem('contasPlaneja', JSON.stringify(novasContas));
+            alert('Conta excluída com sucesso!');
+            displayContas(); // Atualiza a lista de contas e o select de conciliação
+        }
+
+        // UPDATE (Abre Modal para Edição de Conta)
+        function editConta(idParaEditar) {
+            console.log("Abrindo modal para Editar Conta ID:", idParaEditar);
+            let contas = JSON.parse(localStorage.getItem('contasPlaneja')) || [];
+            const contaParaEditar = contas.find(conta => conta.id === idParaEditar);
+            if (!contaParaEditar) { alert('Erro: Conta não encontrada.'); return; }
+
+            contaIdInput.value = contaParaEditar.id;
+            contaNomeInput.value = contaParaEditar.nome;
+            contaTipoInput.value = contaParaEditar.tipo;
+            contaSaldoInicialInput.value = contaParaEditar.saldoInicial || '0.00'; // Preenche saldo inicial
+
+            modalContaTitle.innerText = 'Editar Conta';
+            btnSalvarConta.innerText = 'Salvar Alterações';
+            modalConta.style.display = 'flex';
+        }
+
+        // --- CREATE / UPDATE Conta (Manipulador do Formulário) ---
+        contaForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const id = contaIdInput.value;
+            const nome = contaNomeInput.value.trim();
+            const tipo = contaTipoInput.value;
+            const saldoInicial = parseFloat(contaSaldoInicialInput.value) || 0; // Pega saldo inicial
+
+            if (!nome || !tipo) { alert('Preencha o nome e o tipo da conta.'); return; }
+
+            let contas = JSON.parse(localStorage.getItem('contasPlaneja')) || [];
+
+            if (id) { // Modo Update
+                const index = contas.findIndex(c => c.id === parseInt(id));
+                if (index === -1) { alert('Erro ao atualizar: Conta não encontrada.'); closeContaModal(); return; }
+                contas[index].nome = nome;
+                contas[index].tipo = tipo;
+                contas[index].saldoInicial = saldoInicial; // Atualiza saldo
+                alert('Conta atualizada com sucesso!');
+            } else { // Modo Create
+                const novaConta = { id: gerarIdSimples(), nome: nome, tipo: tipo, saldoInicial: saldoInicial }; // Salva saldo
+                contas.push(novaConta);
+                alert('Conta adicionada com sucesso!');
+            }
+
+            localStorage.setItem('contasPlaneja', JSON.stringify(contas));
+            closeContaModal();
+            displayContas(); // Atualiza a lista de contas e o select de conciliação
+        });
+
+        // --- Modal Control Functions (simplificadas) ---
+        function openContaModalForAdd() {
+            contaForm.reset(); contaIdInput.value = '';
+            contaSaldoInicialInput.value = '0.00'; // Reseta saldo inicial para 0
+            modalContaTitle.innerText = 'Adicionar Nova Conta';
+            btnSalvarConta.innerText = 'Salvar';
+            modalConta.style.display = 'flex';
+        }
+        function closeContaModal() { modalConta.style.display = 'none'; }
+        function limparFormConta() { contaForm.reset(); contaIdInput.value = ''; contaSaldoInicialInput.value = '0.00';}
+
+        // --- READ para CARTÕES (Dados Fictícios) ---
+        function displayCartoes() {
+             console.log("Mostrando lista de Cartões...");
+             // Usaremos os dados fictícios definidos no início do script
+             const cartoes = JSON.parse(localStorage.getItem('cartoesPlaneja')) || cartoesFicticios; // Lê do storage ou usa o default
+             listaCartoesContainer.innerHTML = ''; // Limpa
+
+             if (cartoes.length === 0) {
+                  listaCartoesContainer.innerHTML = '<div class="empty-state"><p>Nenhum cartão encontrado.</p></div>';
+             } else {
+                  cartoes.forEach(cartao => {
+                       const itemDiv = document.createElement('div');
+                       itemDiv.classList.add('item');
+                       itemDiv.innerHTML = `
+                            <div>
+                                <span>${cartao.nome}</span>
+                                <span class="card-details">
+                                    Limite: ${formatCurrency(cartao.limite)} |
+                                    ${cartao.parcelas}x Parcelas Ativas |
+                                    Devido: ${formatCurrency(cartao.devido)}
+                                </span>
+                            </div>
+                            <div class="item-actions">
+                                <button disabled title="Edição de cartões não implementada">Editar</button>
+                                <button disabled title="Exclusão de cartões não implementada">Excluir</button>
+                            </div>
+                       `;
+                       listaCartoesContainer.appendChild(itemDiv);
+                  });
+             }
+        }
+
+        // --- Conciliação (Exemplo Simples) ---
+        const conciliacaoForm = document.getElementById('conciliacaoForm');
+        const infoConciliacao = document.getElementById('info-conciliacao');
+
+        conciliacaoForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const contaIdSelecionada = selectConciliacao.value;
+            const saldoRealInput = document.getElementById('saldo_real').value;
+
+            if (!contaIdSelecionada || saldoRealInput === '') {
+                alert('Selecione uma conta e informe o saldo real.');
+                return;
+            }
+
+            const saldoReal = parseFloat(saldoRealInput);
+            let contas = JSON.parse(localStorage.getItem('contasPlaneja')) || [];
+            const contaSelecionada = contas.find(c => c.id === parseInt(contaIdSelecionada));
+
+            if (!contaSelecionada) {
+                alert('Conta selecionada não encontrada.'); return;
+            }
+
+            const saldoCalculado = contaSelecionada.saldoInicial || 0; // Aqui deveria ser o saldo CALCULADO pelo app, não o inicial! Usando inicial como placeholder.
+            const diferenca = saldoReal - saldoCalculado;
+
+            infoConciliacao.innerText = `Saldo informado: ${formatCurrency(saldoReal)}. Saldo calculado (exemplo): ${formatCurrency(saldoCalculado)}. Diferença: ${formatCurrency(diferenca)}`;
+            alert(`Conciliação para ${contaSelecionada.nome} registrada (Exemplo). Diferença: ${formatCurrency(diferenca)}`);
+            // Aqui você poderia salvar a data/hora da conciliação e a diferença em algum lugar
+        });
+
+
+        // --- Chamadas Iniciais ao Carregar a Página ---
+        window.onload = () => {
+            displayContas();
+            displayCartoes();
+        };
+
+    </script>
+
+</body>
+</html>

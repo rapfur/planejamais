@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionalidades - Planeja+</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Adicionar link para Font Awesome se for usar ícones -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+    <style>
+        /* Estilos específicos para esta tela de onboarding */
+        body {
+            background-color: var(--cor-azul-escuro);
+            color: var(--cor-branco);
+            display: flex;
+            flex-direction: column; /* Empilhar verticalmente */
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+        .onboarding-features {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1000px; /* Ajuste conforme necessário */
+            gap: 30px; /* Espaço entre as colunas */
+            margin-bottom: 50px; /* Espaço antes do botão */
+        }
+        .feature-column {
+            background-color: var(--cor-branco);
+            color: var(--cor-texto-padrao);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            width: 30%; /* Aproximadamente um terço */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .feature-column .icon-placeholder {
+            /* Placeholder para o ícone */
+            height: 60px;
+            width: 60px;
+            background-color: var(--cor-laranja); /* Ou usar img/font icon */
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cor-branco);
+            font-size: 1.5em; /* Tamanho do texto do ícone placeholder */
+        }
+         .feature-column .icon-placeholder i { /* Se usar Font Awesome */
+            font-size: 1.8em;
+            color: var(--cor-branco);
+         }
+
+        .feature-column h2 {
+            color: var(--cor-laranja);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+        }
+        .feature-column p {
+            font-size: 0.95em;
+            color: var(--cor-cinza-texto);
+            line-height: 1.5;
+        }
+
+        .btn-iniciar-app { /* Estilo do botão INICIAR */
+             background-color: var(--cor-laranja);
+            color: var(--cor-branco);
+            border: none;
+            padding: 12px 40px; /* Mais largo */
+            border-radius: 4px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+        .btn-iniciar-app:hover {
+             background-color: #e06c30;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="onboarding-features">
+        <div class="feature-column">
+            <div class="icon-placeholder">
+                <!-- <i class="fas fa-chart-line"></i> ou img -->
+                <span>[Icon]</span>
+            </div>
+            <h2>Educação Financeira</h2>
+            <p>Com base no seu perfil, enviaremos dicas personalizadas de investimentos e estratégias para economizar seu dinheiro.</p>
+        </div>
+        <div class="feature-column">
+             <div class="icon-placeholder">
+                 <!-- <i class="fas fa-calendar-alt"></i> ou img -->
+                 <span>[Icon]</span>
+            </div>
+            <h2>Meus Boletos</h2>
+            <p>Receba notificações sobre contas a vencer e evite novas dívidas com mais facilidade.</p>
+        </div>
+        <div class="feature-column">
+             <div class="icon-placeholder">
+                 <!-- <i class="fas fa-chart-pie"></i> ou img -->
+                 <span>[Icon]</span>
+            </div>
+            <h2>Organização de Gastos</h2>
+            <p>Uma maneira simples, rápida e eficiente de organizar seus gastos.</p>
+        </div>
+    </div>
+
+    <a href="dashboard.html" class="btn-iniciar-app">Iniciar &gt;</a>
+
+</body>
+</html>

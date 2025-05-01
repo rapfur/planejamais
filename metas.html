@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metas - Planeja+</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Adicionar link para Font Awesome se for usar ícones -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+    <style>
+        /* Estilos adicionais para a grade de categorias de metas */
+        .metas-categorias {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .meta-categoria i { /* Placeholder para ícones */
+             font-size: 3em;
+             color: var(--cor-laranja);
+             margin-bottom: 10px;
+             display: block; /* Para que margem funcione */
+        }
+         .meta-categoria h3 {
+            font-size: 1.1em;
+            color: var(--cor-texto-padrao);
+        }
+        .gastos-relatorio p {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        .gastos-relatorio span {
+             font-weight: bold;
+        }
+         .gastos-relatorio strong { /* Para destacar o relatório */
+             color: #28a745; /* Verde para sucesso */
+         }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Menu Lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="img/logo-planeja.png" alt="Logo Planeja+">
+            </div>
+            <nav>
+                <ul class="sidebar-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="transacoes.html">Transações</a></li>
+                    <li><a href="contas_cartoes.html">Contas e Cartões</a></li>
+                    <li><a href="dividas.html">Dívidas</a></li>
+                    <li><a href="metas.html" class="active">Metas</a></li>
+                    <li><a href="educacao_financeira.html">Educação Financeira</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-icons">
+                    <a href="perfil.html" title="Perfil">👤</a>
+                    <a href="configuracoes.html" title="Configurações">⚙️</a>
+                </div>
+                <div class="sidebar-copyright">
+                    Planeja+<br>
+                    Copyright 2025
+                </div>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Metas</h1>
+                 <!-- Botão para adicionar/gerenciar metas específicas -->
+                 <a href="#" class="btn-adicionar">+ Nova Meta</a> <!-- Link para modal ou página de adição -->
+            </header>
+
+            <!-- Seção Categorias de Metas -->
+            <section class="content-section">
+                <h2>Categorias Principais</h2>
+                 <div class="metas-categorias">
+                     <div class="meta-categoria">
+                         <i>📊</i> <!-- Placeholder Ícone Reduzir Dívidas -->
+                         <h3>Reduzir dívidas</h3>
+                     </div>
+                      <div class="meta-categoria">
+                         <i>💰</i> <!-- Placeholder Ícone Economizar -->
+                         <h3>Economizar</h3>
+                     </div>
+                      <div class="meta-categoria">
+                         <i>📈</i> <!-- Placeholder Ícone Investir -->
+                         <h3>Investir</h3>
+                     </div>
+                 </div>
+            </section>
+
+             <!-- Seção Gastos e Relatório -->
+            <section class="content-section gastos-relatorio">
+                 <div style="display: flex; justify-content: space-between;">
+                     <div>
+                         <h2>Gastos</h2>
+                         <p>Mês anterior: <span>R$ 5.000,00</span></p>
+                         <p>Mês atual: <span>R$ 4.000,00</span></p>
+                     </div>
+                     <div>
+                        <h2>Relatório</h2>
+                        <p>Você reduziu seus gastos em <strong>20%</strong> em relação ao mês anterior.</p>
+                        <p>Você reduziu/economizou <strong>R$ 1.000,00</strong> em relação ao mês anterior.</p>
+                        <p>Você pode investir <strong>R$ 1.000,00</strong> neste mês.</p>
+                        <!-- Adicionar mais alertas e status de metas aqui -->
+                     </div>
+                 </div>
+            </section>
+
+            <!-- Seção para listar Metas Específicas (Placeholder) -->
+            <section class="lista-itens content-section">
+                <h2>Minhas Metas Específicas</h2>
+                <div class="empty-state">
+                     <p>Nenhuma meta específica definida ainda. Clique em "+ Nova Meta" para começar.</p>
+                 </div>
+                 <!-- Exemplo de item (Meta) -->
+                 <!--
+                 <div class="item">
+                     <span>Viagem de Férias</span>
+                     <span>Progresso: R$ 1.500 / R$ 5.000 (30%)</span>
+                 </div>
+                 -->
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>

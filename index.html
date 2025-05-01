@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Planeja+</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Adicionar link para Font Awesome se for usar ícones -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+</head>
+<body>
+    <div class="auth-container">
+        <header class="auth-header">
+            <!-- Usando a tag img para a logo -->
+            <img src="img/logo-planeja.png" alt="Logo Planeja+" class="auth-logo">
+        </header>
+
+        <main class="auth-main">
+            <div class="auth-box">
+                <h1>Login</h1>
+                <p>Bem-vindo! Aqui, o controle está em suas mãos. Gerencie com facilidade e eficiência.</p>
+
+                <form action="#" method="post" id="loginForm">
+                    <div class="form-group">
+                        <!-- <label for="email">E-mail</label> --> <!-- O mockup não tem label visível, usa placeholder -->
+                        <input type="email" id="email" name="email" placeholder="E-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="senha">Senha</label> --> <!-- O mockup não tem label visível, usa placeholder -->
+                        <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                    </div>
+                    <button type="submit" class="btn-principal">Entrar</button>
+                </form>
+
+                <div class="auth-links">
+                    <a href="03_recuperar_senha.html">Esqueci minha senha</a>
+                    <a href="02_cadastro.html">Criar nova conta</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+    
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+    
+            const emailInput = document.getElementById('email');
+            const senhaInput = document.getElementById('senha');
+    
+            const email = emailInput.value.trim();
+            const senha = senhaInput.value; // Senha digitada para login
+    
+            // Validações simples
+            if (!email || !senha) {
+                alert('Por favor, preencha e-mail e senha.');
+                return;
+            }
+    
+            // --- Lógica do LocalStorage ---
+            // Pega usuários cadastrados
+            const usuarios = JSON.parse(localStorage.getItem('usuariosPlaneja')) || [];
+    
+            // Procura pelo usuário com o e-mail E a senha correspondente (COMPARACAO INSEGURA!)
+            const usuarioEncontrado = usuarios.find(user => user.email === email && user.senha === senha);
+    
+            if (usuarioEncontrado) {
+                // Login bem-sucedido!
+                alert('Login realizado com sucesso! Bem-vindo(a), ' + usuarioEncontrado.nome + '!');
+    
+                // Salva o usuário "logado" na sessionStorage (dura só enquanto a aba/navegador está aberto)
+                // Poderia salvar só o email ou um token simples
+                sessionStorage.setItem('usuarioLogadoPlaneja', JSON.stringify(usuarioEncontrado));
+    
+                // Redireciona para o dashboard (ou onboarding se fosse a primeira vez - lógica mais complexa)
+                window.location.href = 'dashboard.html'; // Ou '04_onboarding_1.html'
+    
+            } else {
+                // Login falhou
+                alert('E-mail ou senha inválidos.');
+                // Limpar campo de senha por segurança (simbólica, já que tudo é inseguro aqui)
+                senhaInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>

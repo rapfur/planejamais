@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Planeja+</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Adicionar link para Font Awesome se for usar ícones -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+</head>
+<body>
+    <div class="app-container">
+        <!-- Menu Lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="img/logo-planeja.png" alt="Logo Planeja+">
+            </div>
+            <nav>
+                <ul class="sidebar-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="transacoes.html">Transações</a></li>
+                    <li><a href="contas_cartoes.html">Contas e Cartões</a></li>
+                    <li><a href="dividas.html">Dívidas</a></li>
+                    <li><a href="metas.html">Metas</a></li>
+                    <li><a href="educacao_financeira.html">Educação Financeira</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-icons">
+                    <!-- Ícone de Perfil ativo -->
+                    <a href="perfil.html" title="Perfil" class="active">👤</a> <!-- Ícone Usuário Placeholder -->
+                    <a href="configuracoes.html" title="Configurações">⚙️</a> <!-- Ícone Config Placeholder -->
+                </div>
+                <div class="sidebar-copyright">
+                    Planeja+<br>
+                    Copyright 2025
+                </div>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Meu Perfil</h1>
+                 <!-- Sem botão de adicionar aqui geralmente -->
+            </header>
+
+            <section class="content-section">
+                <div class="perfil-config-container">
+                     <div class="icon-grande">
+                         👤 <!-- Placeholder Ícone Usuário Grande -->
+                         <!-- Se usar Font Awesome: <i class="fas fa-user-circle"></i> -->
+                     </div>
+                     <!-- Link para editar dados do usuário (nome, email, etc) -->
+                     <a href="#">Dados do usuário</a>
+                     <!-- Link para alterar senha -->
+                     <a href="#">Alterar senha</a>
+                     <!-- Link para Sair -->
+                     <a href="index.html" class="sair-sessao">SAIR DA SESSÃO</a>
+                 </div>
+            </section>
+
+             <!-- Seção Opcional para Dados do Usuário (se não for uma página separada) -->
+            <!--
+            <section class="content-section" id="dados-usuario-section" style="display: none;"> // Escondido por padrão
+                <h2>Dados do Usuário</h2>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="perfil-nome">Nome Completo:</label>
+                        <input type="text" id="perfil-nome" name="perfil-nome" value="[Nome do Usuário]" placeholder="Seu nome completo (opcional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="perfil-email">E-mail:</label>
+                        <input type="email" id="perfil-email" name="perfil-email" value="[email@usuario.com]" disabled> // E-mail geralmente não editável diretamente
+                    </div>
+                     <div class="form-group">
+                        <label for="perfil-idade">Idade:</label>
+                        <input type="number" id="perfil-idade" name="perfil-idade" placeholder="(Opcional)">
+                    </div>
+                     <div class="form-group">
+                        <label for="perfil-cidade">Cidade:</label>
+                        <input type="text" id="perfil-cidade" name="perfil-cidade" placeholder="(Opcional)">
+                    </div>
+                    <button type="submit" class="btn-principal" style="width: auto; padding: 10px 20px;">Salvar Alterações</button>
+                </form>
+            </section>
+            -->
+
+        </main>
+    </div>
+     <!-- Script simples para mostrar/esconder seção de dados (exemplo, idealmente feito com JS mais robusto) -->
+     <!--
+     <script>
+         // function toggleDadosUsuario() {
+         //    var section = document.getElementById('dados-usuario-section');
+         //    section.style.display = section.style.display === 'none' ? 'block' : 'none';
+         //}
+         // // Adicionar onclick="toggleDadosUsuario()" no link "Dados do usuário"
+     </script>
+     -->
+</body>
+</html>

@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta - Planeja+</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Adicionar link para Font Awesome se for usar ícones -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+</head>
+<body>
+    <div class="auth-container">
+        <header class="auth-header">
+            <img src="img/logo-planeja.png" alt="Logo Planeja+" class="auth-logo">
+        </header>
+
+        <main class="auth-main">
+            <div class="auth-box">
+                <h2>Criar conta</h2>
+                <!-- <p>Preencha os campos abaixo para criar sua conta.</p> --> <!-- O mockup não tem essa frase, pode adicionar se quiser -->
+
+                <form action="#" method="post" id="cadastroForm">
+                    <div class="form-group">
+                        <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="E-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                    </div>
+                     <div class="form-group">
+                        <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirmar senha" required>
+                    </div>
+                    <button type="submit" class="btn-principal">Cadastrar</button>
+                </form>
+
+                <div class="auth-links">
+                     <a href="index.html">Já tenho uma conta</a> <!-- Link para voltar ao login -->
+                </div>
+            </div>
+        </main>
+         <!-- Link Central de Ajuda (Ajustar posicionamento via CSS se necessário) -->
+         <!-- <a href="#" class="ajuda-link"><i class="fas fa-question-circle"></i> Central de ajuda</a> -->
+         <!-- O mockup mostra o link, mas sem ícone e posicionado no canto inferior -->
+         <!-- Adicionar um container separado ou ajustar CSS para .ajuda-link -->
+    </div>
+    <script>
+        const cadastroForm = document.getElementById('cadastroForm');
+    
+        cadastroForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+    
+            const nomeInput = document.getElementById('nome');
+            const emailInput = document.getElementById('email');
+            const senhaInput = document.getElementById('senha');
+            const confirmarSenhaInput = document.getElementById('confirmar_senha');
+    
+            const nome = nomeInput.value.trim();
+            const email = emailInput.value.trim();
+            const senha = senhaInput.value; // NÃO FAÇA ISSO EM PRODUÇÃO! Senha em texto plano.
+            const confirmarSenha = confirmarSenhaInput.value;
+    
+            // Validações simples
+            if (!nome || !email || !senha || !confirmarSenha) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            if (senha !== confirmarSenha) {
+                alert('As senhas não coincidem.');
+                return;
+            }
+    
+            // --- Lógica do LocalStorage ---
+            // Pega usuários existentes ou cria lista vazia
+            let usuarios = JSON.parse(localStorage.getItem('usuariosPlaneja')) || [];
+    
+            // Verifica se o e-mail já existe
+            const usuarioExistente = usuarios.find(user => user.email === email);
+            if (usuarioExistente) {
+                alert('Este e-mail já está cadastrado.');
+                return;
+            }
+    
+            // Adiciona novo usuário (NÃO SEGURO - SENHA EM TEXTO PLANO)
+            usuarios.push({ nome: nome, email: email, senha: senha });
+    
+            // Salva a lista atualizada no localStorage
+            localStorage.setItem('usuariosPlaneja', JSON.stringify(usuarios));
+    
+            alert('Cadastro realizado com sucesso! Você será redirecionado para o login.');
+            console.log('Usuários no localStorage:', usuarios); // Para depuração
+    
+            // Redireciona para a página de login
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
